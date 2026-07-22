@@ -231,11 +231,12 @@ export async function runSetup(guild: Guild, dryRun: boolean): Promise<SetupResu
         continue;
       }
       try {
+        const denyEveryoneSend = (chTemplate.denySend ?? []).includes('@everyone');
         const overwrites = buildOverwrites(
           guild,
           chTemplate,
           catTemplate,
-          (chTemplate.denySend ?? []).includes('@everyone')
+          denyEveryoneSend
         );
         await withRetry(
           () => createChannel(guild, chTemplate, category?.id, overwrites),
