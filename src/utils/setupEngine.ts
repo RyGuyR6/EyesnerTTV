@@ -286,12 +286,7 @@ async function createChannel(
   parentId: string | undefined,
   permissionOverwrites: OverwriteData[]
 ): Promise<void> {
-  const type =
-    ch.type === 'voice'
-      ? ChannelType.GuildVoice
-      : ch.type === 'announcement'
-      ? ChannelType.GuildAnnouncement
-      : ChannelType.GuildText;
+  const type = resolveChannelType(guild, ch);
 
   await guild.channels.create({
     name: ch.name,
@@ -302,6 +297,31 @@ async function createChannel(
     permissionOverwrites: permissionOverwrites.length > 0 ? permissionOverwrites : undefined,
     reason: 'EyesnerTTV setup',
   });
+}
+
+type SetupChannelType =
+  | ChannelType.GuildText
+  | ChannelType.GuildVoice
+  | ChannelType.GuildAnnouncement;
+
+function resolveChannelType(guild: Guild, ch: ChannelTemplate): SetupChannelType {
+  if (ch.type === 'voice') {
+    return ChannelType.GuildVoice;
+  }
+
+  if (ch.type === 'announcement') {
+    // Announcement/news channels require the Community feature.
+    if (guild.features.includes('COMMUNITY')) {
+      return ChannelType.GuildAnnouncement;
+    }
+
+    logger.warn(
+      `Guild is not a Community server; creating "${ch.name}" as GuildText instead of GuildAnnouncement.`
+    );
+    return ChannelType.GuildText;
+  }
+
+  return ChannelType.GuildText;
 }
 
 // ─── Role hierarchy checker ───────────────────────────────────────────────────
