@@ -9,6 +9,8 @@ import { repair } from './repair';
 import { update } from './update';
 import { backup } from './backup';
 import { help } from './help';
+import { rules } from './rules';
+import { schedule } from './schedule';
 
 export const commands = new Collection<string, BotCommand>([
   [setup.data.name, setup],
@@ -16,5 +18,7 @@ export const commands = new Collection<string, BotCommand>([
   [repair.data.name, repair],
   [update.data.name, update],
   [backup.data.name, backup],
+  [rules.data.name, rules],
+  [schedule.data.name, schedule],
   [help.data.name, help],
 ]);

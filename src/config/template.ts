@@ -245,6 +245,14 @@ export const TEMPLATE: ServerTemplate = {
           allowSend: STAFF_POSTER_ROLES,
         },
         {
+          name: '🌐・socials',
+          type: 'text',
+          topic:
+            'Official links: Twitch https://twitch.tv/eyesner/home | TikTok https://www.tiktok.com/@eyesner?_r=1&_t=ZT-98Fim1fViWc',
+          denySend: ['@everyone'],
+          allowSend: STAFF_POSTER_ROLES,
+        },
+        {
           name: '🔴・live-now',
           type: 'text',
           topic: 'Live stream notifications.',

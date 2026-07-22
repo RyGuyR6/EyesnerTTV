@@ -5,6 +5,7 @@ import { Client, GatewayIntentBits, Events } from 'discord.js';
 import { loadConfig } from './config/env';
 import { commands } from './commands';
 import { deployCommands } from './utils/deploy';
+import { officialWelcomeDmEmbed } from './utils/embeds';
 import { logger, setLogLevel } from './utils/logger';
 
 async function main(): Promise<void> {
@@ -24,6 +25,7 @@ async function main(): Promise<void> {
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
+      GatewayIntentBits.GuildMembers,
     ],
   });
 
@@ -31,6 +33,16 @@ async function main(): Promise<void> {
   client.once(Events.ClientReady, (c) => {
     logger.info(`✅ Logged in as ${c.user.tag}`);
     logger.info(`Serving guild: ${config.guildId}`);
+  });
+
+  client.on(Events.GuildMemberAdd, async (member) => {
+    try {
+      await member.send({ embeds: [officialWelcomeDmEmbed(member.guild.name)] });
+      logger.info(`Sent welcome DM to ${member.user.tag}`);
+    } catch (err) {
+      const reason = err instanceof Error ? err.message : String(err);
+      logger.warn(`Could not send welcome DM to ${member.user.tag}: ${reason}`);
+    }
   });
 
   // ── Interaction handler ───────────────────────────────────────────────────

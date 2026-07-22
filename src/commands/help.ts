@@ -51,6 +51,18 @@ export const help: BotCommand = {
           value: 'Exports the current server structure (roles, categories, channels) to a JSON file.',
         },
         {
+          name: '📜 `/rules`',
+          value:
+            'Posts the official server rules embed in the current channel. ' +
+            'Optional `pin` argument pins the message for visibility.',
+        },
+        {
+          name: '📅 `/schedule`',
+          value:
+            'Posts or edits the official stream schedule embed. ' +
+            'Use `/schedule post` to publish and `/schedule edit` with a message ID to update it.',
+        },
+        {
           name: '❓ `/help`',
           value: 'Shows this help message.',
         },

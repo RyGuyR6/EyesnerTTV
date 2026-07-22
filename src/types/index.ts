@@ -74,10 +74,16 @@ export interface GuildSnapshot {
 
 // ─── Command Interface ─────────────────────────────────────────────────────────
 
-import { SlashCommandBuilder, ChatInputCommandInteraction, Client } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
+  SlashCommandSubcommandsOnlyBuilder,
+  ChatInputCommandInteraction,
+  Client,
+} from 'discord.js';
 
 export interface BotCommand {
-  data: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
   execute(interaction: ChatInputCommandInteraction, client: Client): Promise<void>;
 }
 
