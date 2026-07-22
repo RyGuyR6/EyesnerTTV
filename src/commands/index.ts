@@ -11,6 +11,7 @@ import { backup } from './backup';
 import { help } from './help';
 import { rules } from './rules';
 import { schedule } from './schedule';
+import { socials } from './socials';
 
 export const commands = new Collection<string, BotCommand>([
   [setup.data.name, setup],
@@ -20,5 +21,6 @@ export const commands = new Collection<string, BotCommand>([
   [backup.data.name, backup],
   [rules.data.name, rules],
   [schedule.data.name, schedule],
+  [socials.data.name, socials],
   [help.data.name, help],
 ]);

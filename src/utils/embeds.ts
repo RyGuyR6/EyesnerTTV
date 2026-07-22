@@ -172,6 +172,16 @@ export interface StreamScheduleEmbedInput {
   editorTag: string;
 }
 
+export interface SocialsEmbedInput {
+  title?: string;
+  editorTag: string;
+  twitchUrl?: string;
+  tiktokUrl?: string;
+  youtubeUrl?: string;
+  xUrl?: string;
+  instagramUrl?: string;
+}
+
 export function officialStreamScheduleEmbed(input: StreamScheduleEmbedInput): EmbedBuilder {
   return brandEmbed()
     .setTitle(input.title ?? '📅 Official Stream Schedule')
@@ -216,6 +226,38 @@ export function officialWelcomeDmEmbed(guildName: string): EmbedBuilder {
         name: '🎮 Get Involved',
         value:
           'Join discussions, share clips and highlights, and hop into voice channels during community events.',
+      }
+    );
+}
+
+export function officialSocialsEmbed(input: SocialsEmbedInput): EmbedBuilder {
+  const twitch = input.twitchUrl ?? 'https://twitch.tv/eyesner/home';
+  const tiktok = input.tiktokUrl ?? 'https://www.tiktok.com/@eyesner?_r=1&_t=ZT-98Fim1fViWc';
+
+  const optionalLinks: string[] = [];
+  if (input.youtubeUrl) optionalLinks.push(`• YouTube: ${input.youtubeUrl}`);
+  if (input.xUrl) optionalLinks.push(`• X/Twitter: ${input.xUrl}`);
+  if (input.instagramUrl) optionalLinks.push(`• Instagram: ${input.instagramUrl}`);
+
+  return brandEmbed()
+    .setTitle(input.title ?? '🌐 Official Social Links')
+    .setDescription('Follow official Eyesner channels and turn on notifications so you never miss content.')
+    .addFields(
+      {
+        name: '📺 Twitch',
+        value: twitch,
+      },
+      {
+        name: '🎵 TikTok',
+        value: tiktok,
+      },
+      {
+        name: '🔗 More Links',
+        value: optionalLinks.length > 0 ? optionalLinks.join('\n') : 'No additional links set.',
+      },
+      {
+        name: '🛠️ Last Updated By',
+        value: input.editorTag,
       }
     );
 }

@@ -63,6 +63,12 @@ export const help: BotCommand = {
             'Use `/schedule post` to publish and `/schedule edit` with a message ID to update it.',
         },
         {
+          name: '🌐 `/socials`',
+          value:
+            'Posts or edits the official socials embed with Twitch/TikTok links. ' +
+            'Use `/socials post` to publish and `/socials edit` with a message ID to update it.',
+        },
+        {
           name: '❓ `/help`',
           value: 'Shows this help message.',
         },
