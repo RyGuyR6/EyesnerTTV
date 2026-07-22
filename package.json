@@ -1,0 +1,53 @@
+{
+  "name": "eyesnertv",
+  "version": "1.0.0",
+  "description": "EyesnerTTV – A temporary Discord setup bot for building a polished streamer community.",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node --project tsconfig.json src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "start": "node dist/index.js",
+    "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
+    "test": "jest --passWithNoTests",
+    "doctor": "ts-node --project tsconfig.json scripts/doctor.ts",
+    "validate": "npm run lint && npm run build && npm run test"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/index.ts"
+    ]
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "setup",
+    "streamer",
+    "typescript"
+  ],
+  "author": "EyesnerTTV",
+  "license": "MIT"
+}
